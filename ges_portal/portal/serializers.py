@@ -15,7 +15,10 @@ class UserSerializer(serializers.ModelSerializer):
             "role",
             "payment_status",
             "ca_code",
-            "date_joined"
+            "date_joined",
+            "shirt_size",
+            "arrival_date",
+            "ges_id"
         )
     def create(self, validated_data):
         phone_number = validated_data.get('phone_number', '')
@@ -32,6 +35,9 @@ class UserSerializer(serializers.ModelSerializer):
             last_name=validated_data['last_name'],
             role=validated_data['role'],
             payment_status=validated_data['payment_status'],
+            shirt_size = validated_data['shirt_size'],
+            arrival_date = validated_data['arrival_date'],
+            # departure_date = validated_data['departure_date']
         )
         return user
     

@@ -18,9 +18,20 @@ class Users(User):
     role=models.CharField(max_length=24,choices=roles)
     payment_status = models.BooleanField(default=False)
     ca_code = models.CharField(max_length=6,blank=True,null=True)
-    # date = models.DateField(auto_now_add=True)
+    ges_id = models.CharField(max_length=10, unique=True, blank=True,default=f'GES{uuid.uuid4().hex[:4].upper()}')
+
+    sizes=[
+        ("S","S"),
+        ("M","M"),
+        ("L","L"),
+        ("XL","XL"),
+        ("XXL","XXL"),
+    ]
+    shirt_size = models.CharField(max_length=24,choices=sizes,blank=True,null=True)
+    arrival_date = models.DateField(blank=True,null=True)
+    departure_date = models.DateField(blank=True,null=True)
     def __str__(self):
-        return self.first_name
+        return f"{self.first_name} {self.last_name}"
 
 
 class Contingent(models.Model):
@@ -38,7 +49,7 @@ class Professional(models.Model):
     years_of_experience = models.PositiveIntegerField()
     curr_org = models.CharField(max_length=256)
     def __str__(self):
-        return self.user.first_name
+        return f"{self.user.first_name} {self.user.last_name}"
     
 
 class Startup(models.Model):
@@ -64,7 +75,7 @@ class Student(models.Model):
     year = models.PositiveIntegerField(validators=[MinValueValidator(1), MaxValueValidator(5), ])
     dept = models.CharField(max_length=256)
     def __str__(self):
-        return self.user.first_name
+        return f"{self.user.first_name} {self.user.last_name}"
 
 
 
@@ -84,7 +95,7 @@ class CA(models.Model):
         default=str(uuid.uuid4())[:4],
     )
     def __str__(self):
-        return self.user.first_name   
+        return f"{self.user.first_name} {self.user.last_name}"  
 
 
 
