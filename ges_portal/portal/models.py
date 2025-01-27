@@ -87,7 +87,6 @@ class CA(models.Model):
     dept = models.CharField(max_length=256)
     no_of_regs = models.PositiveIntegerField(default=0)
     registered_users = models.ManyToManyField(Users, related_name="referral_cas",default=None)
-    target_regs=models.PositiveIntegerField(blank=True,null=True)
     link = models.URLField(blank=True,null=True,default="")
     referral_code = models.CharField(
         max_length=4, 
