@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-sz%!y%d173kb1__akhdf(7a+q6^rbmlo@rp84r$zt%&2k9k8w0
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['https://api-ges.ecell-iitkgp.org']
+ALLOWED_HOSTS = ['api-ges.ecell-iitkgp.org','127.0.0.1']
 CSRF_TRUSTED_ORIGINS = ['https://api-ges.ecell-iitkgp.org']
 
 
