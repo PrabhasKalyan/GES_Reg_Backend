@@ -7,7 +7,7 @@ import uuid
 from django.contrib.auth.models import AbstractUser
 
 class Users(User):
-    phone_number=models.CharField(max_length=12)
+    phone_number=models.CharField(max_length=15)
     roles=[
         ("Student","Student"),
         ("CA","CA"),
