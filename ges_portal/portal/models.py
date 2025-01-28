@@ -27,10 +27,8 @@ class Users(User):
 
     ges_id = models.CharField(max_length=10, unique=True, blank=True)
     def save(self, *args, **kwargs):
-        # Generate unique ges_id and referral_code before saving
         if not self.ges_id:
             self.ges_id = create_ges_id()
-        # Call the original save method to save the instance
         super(Users, self).save(*args, **kwargs)
 
     sizes=[
@@ -103,15 +101,11 @@ class CA(models.Model):
     link = models.URLField(blank=True,null=True,default="")
     referral_code = models.CharField(
         max_length=4, 
-        unique=True, 
-        default=create_referral_code,
-    )
+        unique=True)
     def save(self, *args, **kwargs):
         if not self.referral_code:
             self.referral_code = create_referral_code()
-
-        # Call the original save method to save the instance
-        super(Users, self).save(*args, **kwargs)
+        super(CA, self).save(*args, **kwargs)
     def __str__(self):
         return f"{self.user.first_name} {self.user.last_name}"  
 
