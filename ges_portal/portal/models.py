@@ -18,7 +18,11 @@ class Users(User):
     role=models.CharField(max_length=24,choices=roles)
     payment_status = models.BooleanField(default=False)
     ca_code = models.CharField(max_length=6,blank=True,null=True)
-    ges_id = models.CharField(max_length=10, unique=True, blank=True,default=f'GES{uuid.uuid4().hex[:4].upper()}')
+
+    def create_ges_id():
+        return f'GES{uuid.uuid4().hex[:4].upper()}'
+
+    ges_id = models.CharField(max_length=10, unique=True, blank=True,default=create_ges_id)
 
     sizes=[
         ("S","S"),
@@ -88,10 +92,12 @@ class CA(models.Model):
     no_of_regs = models.PositiveIntegerField(default=0)
     registered_users = models.ManyToManyField(Users, related_name="referral_cas",default=None)
     link = models.URLField(blank=True,null=True,default="")
+    def create_referral_code():
+        return str(uuid.uuid4())[:4]
     referral_code = models.CharField(
         max_length=4, 
         unique=True, 
-        default=str(uuid.uuid4())[:4],
+        default=create_referral_code,
     )
     def __str__(self):
         return f"{self.user.first_name} {self.user.last_name}"  
